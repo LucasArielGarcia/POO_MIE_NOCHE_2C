@@ -23,6 +23,9 @@ public class Vehiculo {
         this.disponibilidad = true;
     }
 
+    public boolean sosVehiculo(String id){
+        return this.IdVehiculo == id;
+    }
     public String getIdVehiculo() {
         return IdVehiculo;
     }

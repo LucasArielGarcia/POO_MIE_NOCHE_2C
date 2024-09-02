@@ -6,6 +6,7 @@ import entidades.TipoVehiculo;
 import entidades.Vehiculo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Controlador {
@@ -48,5 +49,24 @@ public class Controlador {
         nuevoVehiculo = new Vehiculo(idVehiculo,false,tipoVehiculo,precio);
         vehiculos.add(nuevoVehiculo);
     }
+
+    public void registrarAlquiler(Cliente cliente, String idVehiculo, Date fechaDesde, Date fechaHasta){
+        Vehiculo vehiculoAlquilar = null;
+
+        for (Vehiculo listaVehiculos : vehiculos) {
+            if (listaVehiculos.sosVehiculo(idVehiculo))
+                    vehiculoAlquilar = listaVehiculos;
+        }
+        if (vehiculoAlquilar == null){
+            System.out.println("El vehiculo no existe");
+            return;
+        }
+
+
+
+
+
+    }
+
     
 }
