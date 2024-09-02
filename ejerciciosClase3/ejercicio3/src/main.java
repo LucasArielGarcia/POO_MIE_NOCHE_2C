@@ -1,6 +1,8 @@
 import controlador.Controlador;
 import entidades.TipoVehiculo;
 
+import java.util.Date;
+
 public class main {
     public static void main(String[] args) {
         Controlador controlador = new Controlador();
@@ -13,6 +15,8 @@ public class main {
         controlador.registrarVehiculo(TipoVehiculo.BICICLETA,1);
 
         controlador.vehiculosOcupados();
+
+        controlador.registrarAlquiler(41798869,"MOT2",new Date(2024,7,14),new Date(2024,7,16));
 
     }
 }

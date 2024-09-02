@@ -24,9 +24,12 @@ public class Vehiculo {
     }
 
     public boolean sosVehiculo(String id){
-        return this.IdVehiculo == id;
+        return this.IdVehiculo.equals(id);
     }
     public String getIdVehiculo() {
         return IdVehiculo;
+    }
+    public double getPrecio() {
+        return precio;
     }
 }

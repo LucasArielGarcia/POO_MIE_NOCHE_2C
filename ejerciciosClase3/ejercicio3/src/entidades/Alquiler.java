@@ -11,13 +11,13 @@ public class Alquiler {
     private Date FechaAlquilerHasta;
     private double MontoAPagar;
 
-    public Alquiler(int idAlquiler, Cliente cliente, Vehiculo vehiculo, Date fechaAlquilerDesde, Date fechaAlquilerHasta, double montoAPagar) {
+    public Alquiler(int idAlquiler, Cliente cliente, Vehiculo vehiculo, Date fechaAlquilerDesde, Date fechaAlquilerHasta) {
         this.idAlquiler = idAlquiler;
         this.cliente = cliente;
         this.vehiculo = vehiculo;
         this.fechaAlquilerDesde = fechaAlquilerDesde;
         this.FechaAlquilerHasta = fechaAlquilerHasta;
-        this.MontoAPagar = montoAPagar;
+        this.MontoAPagar = calcularAlquiler(fechaAlquilerDesde,fechaAlquilerHasta,vehiculo.getPrecio());
     }
 
     public double calcularAlquiler(Date fechaAlquilerDesde, Date fechaAlquilerHasta, double precio){
@@ -27,4 +27,7 @@ public class Alquiler {
         return horas * precio;
     }
 
+    public int getIdAlquiler() {
+        return idAlquiler;
+    }
 }
