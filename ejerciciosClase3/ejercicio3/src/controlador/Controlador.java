@@ -55,7 +55,6 @@ public class Controlador {
         Vehiculo vehiculoAlquilar = null;
         Cliente clienteAlquilar = null;
         Alquiler nuevoAlquiler;
-        double precioDelAlquiler;
         int idAlquiler;
 
         for (Vehiculo vehiculo : listaVvehiculos) {

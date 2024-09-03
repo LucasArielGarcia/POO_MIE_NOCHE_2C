@@ -16,7 +16,7 @@ public class main {
 
         controlador.vehiculosOcupados();
 
-        controlador.registrarAlquiler(41798869,"MOT2",new Date(2024,7,14),new Date(2024,7,16));
+        controlador.registrarAlquiler(41798869,"AUT1",new Date(2024,7,14),new Date(2024,7,16));
 
     }
 }

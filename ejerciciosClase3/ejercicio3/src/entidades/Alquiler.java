@@ -23,7 +23,7 @@ public class Alquiler {
     public double calcularAlquiler(Date fechaAlquilerDesde, Date fechaAlquilerHasta, double precio){
         long calcularFecha = fechaAlquilerHasta.getTime() - fechaAlquilerDesde.getTime();
         long horas = TimeUnit.MILLISECONDS.toHours(calcularFecha);
-        System.out.println(horas);
+        System.out.println(horas + " || " + horas * precio);
         return horas * precio;
     }
 
