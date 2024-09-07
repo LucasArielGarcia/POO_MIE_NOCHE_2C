@@ -1,0 +1,77 @@
+@startuml
+class Habitacion{
+-numeroHabitacion: int
+-pisoHabitacion: int
+-precioHabitacion:double
+-estadoHabitacion: EstadoHabitacion
+{abstract} double calcularPrecio()
+}
+
+class HabitacionSimple{
+{abstract} double calcularPrecio()
+}
+class HabitacionMatrimonial{
+{abstract} double calcularPrecio()
+}
+class HabitacionDoble{
+{abstract} double calcularPrecio()
+}
+
+enum EstadoHabitacion {
+  OCUPADA
+  DISPONIBLE
+}
+
+
+class Cliente{
+-dni: int
+-nombre: String
+-tipoCliente: TipoCliente
+-cantidadReservas: int
+void registrarCliente(dni: int, nombre: String)
+}
+enum TipoCliente {
+  HABITUAL
+  ESPORADICO
+}
+class Reserva{
+cliente: Cliente
+habitacion: Habitacion
+fechaComienzo: Date
+fechaHasta: Date
+cantidadDias: int
+importeSeña: double
+importeTotal: double
+void registrarReserva(cliente: Cliente, habitacion: Habitacion, fechaComienzo: Date, importeSeña: double)
+}
+enum EstadoReserva {
+ ACTIVADA
+ TOMADA
+ CUMPLIDA
+ SEÑADA
+ VENCIDA
+}
+
+class Controlador{
+List<Habitacion> habitacionesDisponibles(fechaDesde: Date, fechaHasta: Date)
+void registrarCliente(dni: int, nombre: String)
+void registrarReserva(dni: int, numeroHabitacion: int, fechaDesde: Date, fechaHasta: Date)
+
+}
+
+Habitacion <|-- HabitacionSimple
+Habitacion <|-- HabitacionMatrimonial
+Habitacion <|-- HabitacionDoble
+Habitacion o-- EstadoHabitacion
+Cliente o-- TipoCliente
+Reserva o-- EstadoReserva
+Reserva o-- Habitacion
+Reserva o-- Cliente
+Controlador *-- Reserva
+Controlador *-- Cliente
+Controlador *-- Habitacion
+
+
+
+
+@enduml
