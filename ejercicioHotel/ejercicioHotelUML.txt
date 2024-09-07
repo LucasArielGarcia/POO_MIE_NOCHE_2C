@@ -1,9 +1,9 @@
 @startuml
 class Habitacion{
--numeroHabitacion: int
--pisoHabitacion: int
--precioHabitacion:double
--estadoHabitacion: EstadoHabitacion
+#numeroHabitacion: int
+#pisoHabitacion: int
+#precioHabitacion:double
+#estadoHabitacion: EstadoHabitacion
 {abstract} double calcularPrecio()
 }
 
@@ -53,6 +53,9 @@ enum EstadoReserva {
 }
 
 class Controlador{
+- List<Habitacion> listHabitaciones
+- List<Cliente> listClientes
+- List<Reserva> listReservas
 List<Habitacion> habitacionesDisponibles(fechaDesde: Date, fechaHasta: Date)
 void registrarCliente(dni: int, nombre: String)
 void registrarReserva(dni: int, numeroHabitacion: int, fechaDesde: Date, fechaHasta: Date)
@@ -65,7 +68,7 @@ Habitacion <|-- HabitacionDoble
 Habitacion o-- EstadoHabitacion
 Cliente o-- TipoCliente
 Reserva o-- EstadoReserva
-Reserva o-- Habitacion
+Reserva o--"1..1" Habitacion
 Reserva o-- Cliente
 Controlador *-- Reserva
 Controlador *-- Cliente
