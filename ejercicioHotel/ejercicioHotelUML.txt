@@ -56,7 +56,7 @@ class Controlador{
 - List<Habitacion> listHabitaciones
 - List<Cliente> listClientes
 - List<Reserva> listReservas
-List<Habitacion> habitacionesDisponibles(fechaDesde: Date, fechaHasta: Date)
+void habitacionesDisponibles(fechaDesde: Date, fechaHasta: Date)
 void registrarCliente(dni: int, nombre: String)
 void registrarReserva(dni: int, numeroHabitacion: int, fechaDesde: Date, fechaHasta: Date)
 
