@@ -1,20 +1,26 @@
 @startuml
 class Habitacion{
-#numeroHabitacion: int
-#pisoHabitacion: int
-#precioHabitacion:double
-#estadoHabitacion: EstadoHabitacion
-{abstract} double calcularPrecio()
+-habitacionesPorPiso: Hashmap
+-numeroHabitacion: int
+-pisoHabitacion: int
+-precioHabitacion:double
+-estadoHabitacion: EstadoHabitacion
++{abstract} double calcularPrecio()
++{abstract} double calcularSeña()
++sosHabitacion(pisoHabitacion: int,numeroHabitacion: int)
 }
 
 class HabitacionSimple{
-{abstract} double calcularPrecio()
++{abstract} double calcularPrecio()
++{abstract} double calcularSeña()
 }
 class HabitacionMatrimonial{
-{abstract} double calcularPrecio()
++{abstract} double calcularPrecio()
++{abstract} double calcularSeña()
 }
 class HabitacionDoble{
-{abstract} double calcularPrecio()
++{abstract} double calcularPrecio()
++{abstract} double calcularSeña()
 }
 
 enum EstadoHabitacion {
@@ -24,28 +30,34 @@ enum EstadoHabitacion {
 
 
 class Cliente{
+-contadorId: static int
+-idCliente: int
 -dni: int
 -nombre: String
 -tipoCliente: TipoCliente
 -cantidadReservas: int
-void registrarCliente(dni: int, nombre: String)
++void registrarCliente(dni: int, nombre: String)
 }
 enum TipoCliente {
   HABITUAL
   ESPORADICO
 }
 class Reserva{
-cliente: Cliente
-habitacion: Habitacion
-fechaComienzo: Date
-fechaHasta: Date
-cantidadDias: int
-importeSeña: double
-importeTotal: double
-void registrarReserva(cliente: Cliente, habitacion: Habitacion, fechaComienzo: Date, importeSeña: double)
+- idReserva: int
+-cliente: Cliente
+-habitacion: Habitacion
+-fechaComienzo: Date
+-fechaHasta: Date
+-cantidadDias: int
+-importeSeña: double
+-importeTotal: double
+-importeAbonado: double
++void registrarReserva(cliente: Cliente, habitacion: Habitacion, fechaComienzo: Date, importeSeña: double)
++ boolean sosReserva(int: id)
++ void abonarReserva(double abono)
 }
 enum EstadoReserva {
- ACTIVADA
+ ESPERA
  TOMADA
  CUMPLIDA
  SEÑADA
@@ -69,7 +81,7 @@ Habitacion o-- EstadoHabitacion
 Cliente o-- TipoCliente
 Reserva o-- EstadoReserva
 Reserva o--"1..1" Habitacion
-Reserva o-- Cliente
+Reserva o-- "1..1" Cliente
 Controlador *-- Reserva
 Controlador *-- Cliente
 Controlador *-- Habitacion
