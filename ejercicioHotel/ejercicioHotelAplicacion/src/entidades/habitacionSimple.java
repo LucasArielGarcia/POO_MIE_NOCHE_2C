@@ -1,8 +1,8 @@
 package entidades;
 
-public class habitacionSimple extends Habitacion{
+public class HabitacionSimple extends Habitacion{
     final String tipo = "Simple";
-    public habitacionSimple(int pisoHabitacion) {
+    public HabitacionSimple(int pisoHabitacion) {
         super(pisoHabitacion);
 
     }

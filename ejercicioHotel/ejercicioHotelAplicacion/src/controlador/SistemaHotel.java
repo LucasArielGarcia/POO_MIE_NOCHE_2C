@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Controlador {
+public class SistemaHotel {
     List<Habitacion> listHabitaciones = new ArrayList<>();
     List<Reserva> listReservas = new ArrayList<>();
     List<Cliente> listCliente = new ArrayList<>();
@@ -18,12 +18,10 @@ public class Controlador {
             clienteNuevo = new Cliente(dni,nombre);
         }
         else {
-            for (Cliente cliente : listCliente){
-                if (cliente.sosCliente(dni)){
-                    System.out.println("El cliente ya existe y es: ");
-                    cliente.mostrarCliente();
-                    return;
-                }
+            Cliente clienteViejo = buscarCliente(dni);
+            if (clienteViejo != null){
+                System.out.println("Existe el cliente");
+                return;
             }
             clienteNuevo = new Cliente(dni,nombre);
         }
@@ -32,7 +30,7 @@ public class Controlador {
     }
 
     public void registrarHabitacionSimple(int pisoHabitacion){
-        habitacionSimple habitacionNueva = new habitacionSimple(pisoHabitacion);
+        HabitacionSimple habitacionNueva = new HabitacionSimple(pisoHabitacion);
         listHabitaciones.add(habitacionNueva);
     }
     public void registrarHabitacionDoble(int pisoHabitacion){
@@ -46,21 +44,12 @@ public class Controlador {
 
 
     public void registrarReserva(int dni,int piso, int numeroHabitacion,Date fechaComienzo, Date fechaHasta) {
-        Cliente clienteReserva = null;
-        Habitacion habitacionReserva = null;
+        Cliente clienteReserva = buscarCliente(dni);
+        Habitacion habitacionReserva = buscarHabitacion(piso,numeroHabitacion);
         Reserva nuevaReserva = null;
-        for (Cliente cliente : listCliente) {
-            if (cliente.sosCliente(dni))
-                clienteReserva = cliente;
-
-        }
         if (clienteReserva == null) {
             System.out.println("No existe cliente");
             return;
-        }
-        for (Habitacion habitacion: listHabitaciones){
-            if (habitacion.sosHabitacion(piso,numeroHabitacion))
-                habitacionReserva = habitacion;
         }
         if (habitacionReserva == null){
             System.out.println("No existe la habitacion");
@@ -72,17 +61,10 @@ public class Controlador {
 
     }
     public void abonarsenaReserva(double abono, int idReserva){
-        Reserva reservaAbonarSena = null;
-        for (Reserva reserva: listReservas){
-            if (reserva.sosReserva(idReserva))
-                reservaAbonarSena = reserva;
-
-        }
+        Reserva reservaAbonarSena = buscarReserva(idReserva);
         if (reservaAbonarSena == null)
             System.out.println("No existe reserva");
         reservaAbonarSena.abonarSena(abono);
-
-
     }
 
 
@@ -91,6 +73,29 @@ public class Controlador {
 
     }
 
-
+    private Cliente buscarCliente(int dni){
+        Cliente clienteBuscar = null;
+        for (Cliente cliente : listCliente) {
+            if (cliente.sosCliente(dni))
+                clienteBuscar = cliente;
+        }
+        return clienteBuscar;
+    }
+    private Reserva buscarReserva(int idReserva){
+        Reserva reservaBuscada = null;
+        for (Reserva reserva: listReservas){
+            if (reserva.sosReserva(idReserva))
+                reservaBuscada = reserva;
+        }
+        return reservaBuscada;
+    }
+    private Habitacion buscarHabitacion(int piso, int nroHabitacion){
+        Habitacion habitacionBuscada = null;
+        for (Habitacion habitacion:listHabitaciones){
+            if (habitacion.sosHabitacion(piso,nroHabitacion))
+                habitacionBuscada = habitacion;
+        }
+        return habitacionBuscada;
+    }
 
 }
