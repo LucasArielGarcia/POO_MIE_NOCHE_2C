@@ -1,0 +1,42 @@
+@startuml
+class Competencia{
+-List<Circuito> listCircuito
+-List<Escuderia>listEscuderia
++registrarEscuderia(String nombre)
++registreCircuito(String: pais, String nombreCircuito, List<Escuderia> escuderia)
+}
+class Carrera{
+-Circuito circuito
++void empezarCarrera()
++void adelantarCoche(Coche coche)
+}
+class Circuito{
+-String pais
+-String nombre
+-int vuelta
+-Lis<Escuderia> escuderia
+}
+class Escuderia{
+-String nombre
+-List<Coche>coche
++registrarCoches(int: velocidadFinal, int capacidadCombustible)
+
+}
+class Coche{
+-int posicion
+- Piloto piloto
+-int velocidadFinal
+-int capacidadCombustible
+-double combustibleCoche
++registrarPiloto(String nombre, String nacionalidad, int nivelHabilidad)
+}
+class Piloto{
+-String nombre
+-String nacionalidad
+-int nivelHabilidad
+}
+
+
+
+
+@enduml
