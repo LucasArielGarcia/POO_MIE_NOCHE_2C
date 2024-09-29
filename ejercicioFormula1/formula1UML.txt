@@ -2,41 +2,58 @@
 class Competencia{
 -List<Circuito> listCircuito
 -List<Escuderia>listEscuderia
+-List<Piloto> listPiloto
+
 +registrarEscuderia(String nombre)
-+registreCircuito(String: pais, String nombreCircuito, List<Escuderia> escuderia)
++registreCircuito(String: pais, String nombreCircuito, int: nroVueltas)
++registrarPiloto(String: nombre, String nacionalidad, int nivelHabilidad)
++registrarCarrera(Circuito circuito, list<Escuderia>listEscuderia)
 }
 class Carrera{
 -Circuito circuito
+-List<Escuderia> listEscuderiaCompetir
+-List<Coche> posiciones
 +void empezarCarrera()
 +void adelantarCoche(Coche coche)
 }
 class Circuito{
 -String pais
 -String nombre
--int vuelta
--Lis<Escuderia> escuderia
+-int vueltas
 }
 class Escuderia{
 -String nombre
 -List<Coche>coche
-+registrarCoches(int: velocidadFinal, int capacidadCombustible)
++asignarCoche(Coche coche)
++perteneceCoche(int idVehiculo) : boolean
 
 }
 class Coche{
+-int id
 -int posicion
 - Piloto piloto
 -int velocidadFinal
 -int capacidadCombustible
 -double combustibleCoche
-+registrarPiloto(String nombre, String nacionalidad, int nivelHabilidad)
++asignarPiloto(Piloto: piloto)
++posicionCoche() :int
 }
 class Piloto{
+-int idPiloto
 -String nombre
 -String nacionalidad
 -int nivelHabilidad
++sosPiloto(int idPiloto): boolean
 }
 
-
-
+Competencia *-- Circuito
+Competencia *-- Carrera
+Competencia *-- Escuderia
+Escuderia *-- Coche
+Coche o-- Piloto
+Carrera o-- Circuito
+Carrera o-- Escuderia
+Carrera o-- Coche
+Competencia *-- Piloto
 
 @enduml
