@@ -8,13 +8,15 @@ class Competencia{
 +registreCircuito(String: pais, String nombreCircuito, int: nroVueltas)
 +registrarPiloto(String: nombre, String nacionalidad, int nivelHabilidad)
 +registrarCarrera(Circuito circuito, list<Escuderia>listEscuderia)
++List<Piloto>empezarCarrera(Carrera carrera)
 }
 class Carrera{
 -Circuito circuito
 -List<Escuderia> listEscuderiaCompetir
 -List<Coche> posiciones
-+void empezarCarrera()
++List<Piloto>empezarCarrera()
 +void adelantarCoche(Coche coche)
++void eventoCarrera()
 }
 class Circuito{
 -String pais
