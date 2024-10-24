@@ -1,0 +1,77 @@
+@startuml
+actor Usuario
+
+Usuario -> CentroDeportivo: void registrarReserva(dni: int, codigoInstalacion: int, fechaHora: date)
+
+activate CentroDeportivo
+
+CentroDeportivo -> CentroDeportivo: Cliente existeCliente(dni: int)
+activate CentroDeportivo
+loop por cada cliente
+alt si el dni del cliente coincide
+CentroDeportivo -> Cliente: boolean soyCliente(dni: int)
+Cliente --> CentroDeportivo : true
+end
+end
+CentroDeportivo -->CentroDeportivo:  Cliente
+deactivate CentroDeportivo
+
+CentroDeportivo ->CentroDeportivo : Instalacion existeInstalacion(codigo: int)
+activate CentroDeportivo 
+
+loop por cada instalacion
+alt si coincide el codigo
+CentroDeportivo -> Instlacion: boolean soyInstalacion(código: int)
+Instlacion --> CentroDeportivo : true
+end
+end
+
+CentroDeportivo --> CentroDeportivo : Instlacion
+deactivate CentroDeportivo 
+
+loop por cada reserva
+alt si el cliente coincide y el estado de la reserva es distinto a PENDIENTE
+CentroDeportivo -> Reserva: boolean reservaPendiente(dniCliente: int)
+activate CentroDeportivo
+
+alt Si el dni del cliente coincide
+Reserva -> Cliente: boolean soyCliente(dni: int)
+Cliente --> Reserva: true
+end
+Reserva --> CentroDeportivo : false
+end
+end
+CentroDeportivo --> CentroDeportivo: False
+deactivate CentroDeportivo
+
+CentroDeportivo -> CentroDeportivo: boolean superaCantidadMaximaInstalacion(codigoInstalacion: int, fechaHorario: Date)
+activate CentroDeportivo
+
+loop por cada reserva
+alt si el codigo de la instalacion coincide y la fecha de la reserva igual
+CentroDeportivo -> Reserva: boolean getCantidad(codigoInstalacion: int, fechaHora:Date)
+activate Reserva
+
+alt si el codigo de instalacion coincide
+Reserva -> Instlacion: boolean soyInstalacion(código: int)
+Instlacion--> Reserva : True
+Reserva --> CentroDeportivo: true
+deactivate Reserva
+end
+end
+end
+CentroDeportivo -> CentroDeportivo: cantidadDeReserva++
+deactivate CentroDeportivo
+alt si la cantidad maxima de la instalacion es menor a la cantidad que le pasamos por parametro
+CentroDeportivo -> Instalacion: boolean superoCantidadMaxima(cantidad: int)
+activate CentroDeportivo 
+Instalacion --> CentroDeportivo: false
+deactivate CentroDeportivo
+end
+
+
+CentroDeportivo --> Reserva: void registrarReserva(dni: int, codigoInstalacion: int, fechaHora: date)
+deactivate CentroDeportivo 
+
+
+@enduml
