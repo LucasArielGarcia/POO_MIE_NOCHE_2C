@@ -1,0 +1,85 @@
+@startuml
+class CentroDeportivo{
+-listCliente: List<Cliente>
+-listRerva: List<Reserva>
+-Cliente existeCliente(dni: int)
+-Instalacion existeInstalacion(codigo: int)
+-Reserva existeReserva(codigo: int)
+-boolean clienteTieneReservaPendiente(dni: int)
+-boolean superaCantidadMaximaInstalacion(codigoInstalacion: int, fechaHorario: Date)
++ void registrarCliente(dni: int, nombre: String)
++ void registrarReserva(dni: int, codigoInstalacion: int, fechaHora: date)
++ double calcularPrecio(codigoReserva: int)
+
+}
+
+
+abstract Instalacion{
+-codigo: int
+- descripcion: String
+- cantidadPersonas: int
++ void Instalacion (descripcion: String, cantidadPersonas: int)
++{abstract} double formularPrecio()
++{abstract} int crearCodigo()
++boolean superoCantidadMaxima(cantidad: int)
++ boolean soyInstalacion(código: int)
+
+}
+class Pileta{
+-cantidadMetros: double
++{abstract} double formularPrecio()
++{abstract} int crearCodigo()
+}
+class Gymnacio{
+-cantidadMaquinas: int
++{abstract} double formularPrecio()
++{abstract} int crearCodigo()
+}
+class Yoga{
++{abstract} double formularPrecio(int: cantidad)
++{abstract} int crearCodigo()
+}
+
+class Reserva{
+-instalacion: Instalacion
+-cliente: Cliente
+-estado: Estado
+-diaHorario: Date
+-precio: double
++ void Reserva(instalacion: Instalacion, cliente: Cliente, diaHorario: Date)
++boolean reservaPendiente(dniCliente: int)
++double calcularPrecio()
++boolean superaCantidadMaxima(cantidad: int)
++ boolean getCantidad(codigoInstalacion: int, fechaHora:Date)
++ boolean soyReserva(código: int)
+}
+
+enum Estado{
+PENDIENTE
+UTILIZADA
+NO UTILIZADA
+}
+
+Class Cliente{
+-idCliente: int
+-dni: int
+-nombre: String
++ void Cliente(dni: int, nombre: String)
++boolean soyCliente(dni: int)
+}
+
+Instalacion <|-- Gymnacio
+Instalacion <|-- Pileta
+Instalacion <|-- Yoga
+
+Reserva o-- Instalacion
+Reserva o-- Cliente
+Reserva o-- Estado
+
+CentroDeportivo *-- Cliente
+CentroDeportivo *-- Reserva
+CentroDeportivo *-- Instalacion
+
+
+
+@enduml

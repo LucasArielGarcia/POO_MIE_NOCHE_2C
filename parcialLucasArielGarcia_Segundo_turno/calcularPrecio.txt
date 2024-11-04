@@ -1,0 +1,27 @@
+@startuml
+actor Usuario
+
+Usuario -> CentroDeportivo: double calcularPrecio(codigoReserva: int)
+activate CentroDeportivo
+CentroDeportivo -> CentroDeportivo: Reserva existeReserva(codigo: int)
+activate CentroDeportivo 
+loop por cada reserva
+alt si existe reserva
+CentroDeportivo -> Reserva: boolean soyReserva(codigo: int)
+Reserva --> CentroDeportivo: true
+end
+CentroDeportivo --> CentroDeportivo : Reserva
+deactivate CentroDeportivo 
+end
+CentroDeportivo -> Reserva: double calcularPrecio()
+activate Reserva
+Reserva-> Instalacion: {abstract} double formularPrecio()
+Instalacion --> Reserva : double
+deactivate Reserva
+Reserva--> CentroDeportivo: double
+CentroDeportivo --> Usuario: double
+deactivate CentroDeportivo
+
+
+
+@enduml
